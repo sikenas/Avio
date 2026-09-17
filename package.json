@@ -1,0 +1,54 @@
+{
+  "name": "avclient",
+  "version": "0.1.0",
+  "description": "音视频智能处理桌面客户端：下载 → 音轨分离 → Whisper 转写 → 大模型问答",
+  "main": "src/main.js",
+  "author": "AVClient Team",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --win nsis",
+    "dist:portable": "electron-builder --win portable",
+    "dist:win-all": "electron-builder --win nsis,portable,zip"
+  },
+  "build": {
+    "appId": "com.avclient.desktop",
+    "productName": "音视频智能处理客户端",
+    "executableName": "AVClient",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "python/**/*",
+      "!python/**/__pycache__/**",
+      "!python/**/*.pyc"
+    ],
+    "extraResources": [
+      { "from": "resources/python", "to": "python" },
+      { "from": "resources/bin", "to": "bin" }
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": "x64" }
+      ],
+      "artifactName": "AVClient-Setup-${version}.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "音视频智能处理客户端",
+      "deleteAppDataOnUninstall": false
+    }
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  }
+}

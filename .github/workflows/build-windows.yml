@@ -1,0 +1,43 @@
+name: Build Windows Installer
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+# 上传构件需要 actions:write；其余保持最小权限
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  build-windows:
+    name: Build AVClient Setup (Windows x64)
+    runs-on: windows-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20 LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install 7-Zip (for unzip fallback if needed)
+        run: choco install 7zip -y
+        shell: pwsh
+        continue-on-error: true
+
+      - name: Build installer (bundles Python + ffmpeg, real download/extract; transcribe/qa pluggable)
+        shell: pwsh
+        run: .\build-win.ps1
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AVClient-Setup
+          path: dist/AVClient-Setup-*.exe
+          if-no-files-found: error
+          retention-days: 30

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>音视频智能处理客户端</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="proto-bar">
+    <span class="tag">桌面客户端 · v0.1</span>
+    <div class="proto-nav" id="protoNav">
+      <button data-screen="wizard" class="active">① 安装向导</button>
+      <button data-screen="processing">② 工作区·处理中</button>
+      <button data-screen="qa">③ 工作区·问答</button>
+      <button data-screen="settings">④ 设置</button>
+    </div>
+    <span class="proto-hint">点击上方切换界面 · 后端已对接真实管线</span>
+  </div>
+
+  <div class="app">
+    <div class="titlebar">
+      <div class="dots"><i class="d1"></i><i class="d2"></i><i class="d3"></i></div>
+      <div class="t">音视频智能处理客户端</div>
+      <div class="sys"><span>—</span><span>▢</span><span>✕</span></div>
+    </div>
+
+    <div class="topnav">
+      <div class="brand"><span class="logo">音</span> 音视频智能处理客户端</div>
+      <div class="breadcrumb">
+        <span id="bcStage">安装引导</span><span class="sep">›</span><b id="bcSub">依赖安装</b>
+      </div>
+      <div class="dep-pills" id="depPills">
+        <span class="pill" id="pillFF"><span class="led"></span>FFmpeg</span>
+        <span class="pill" id="pillWH"><span class="led"></span>Whisper</span>
+        <span class="pill" id="pillMD"><span class="led"></span>模型接入</span>
+      </div>
+      <div class="icon-btn" title="设置" onclick="showScreen('settings')">⚙</div>
+      <div class="icon-btn" title="新建任务" onclick="addTaskPrompt()">＋</div>
+    </div>
+
+    <div class="body">
+      <div class="sidebar">
+        <div class="side-head"><h3>任务列表</h3><button class="btn-new" onclick="showScreen('processing')">＋ 新建</button></div>
+        <div class="task-list" id="taskList"></div>
+        <div class="side-foot"><span id="taskCount">共 0 个任务</span><span id="usedSpace">— 已用</span></div>
+      </div>
+
+      <div class="center">
+        <div class="center-head">
+          <h2 id="chTitle">开始使用</h2>
+          <span class="meta" id="chMeta">首次启动 · 请完成依赖安装</span>
+        </div>
+        <div class="center-body" id="centerBody"></div>
+      </div>
+
+      <div class="right">
+        <div class="right-head">📚 上下文面板</div>
+        <div class="right-body" id="rightBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot-note">真实可用桌面客户端 v0.1 · 下载/分离已对接后端管线；Whisper 转写与模型问答为真实接口，需在“设置”中安装依赖或配置 API 后启用。</div>
+
+  <script src="app.js"></script>
+</body>
+</html>

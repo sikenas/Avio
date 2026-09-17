@@ -1,0 +1,16 @@
+# 依赖与构建产物
+node_modules/
+dist/
+.venv/
+__pycache__/
+*.pyc
+
+# 由 build-win.ps1 自动生成（CI/本地构建时重建，无需入库）
+resources/python/*
+!resources/python/.gitkeep
+resources/bin/*
+!resources/bin/.gitkeep
+
+# 系统/编辑器
+.DS_Store
+*.log
