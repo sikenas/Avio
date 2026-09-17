@@ -8,12 +8,13 @@
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder --win nsis",
+    "dist": "electron-builder --win nsis --publish=never",
     "dist:portable": "electron-builder --win portable",
     "dist:win-all": "electron-builder --win nsis,portable,zip"
   },
   "build": {
     "appId": "com.avclient.desktop",
+    "publish": false,
     "productName": "音视频智能处理客户端",
     "executableName": "AVClient",
     "directories": {
